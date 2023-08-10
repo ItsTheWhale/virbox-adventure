@@ -1,0 +1,19 @@
+{
+  "name": "virbox-adventure",
+  "version": "1.0.0",
+  "description": "A text-based adventure game",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx http-server ./",
+    "build": "npm run build-tailwind && npx esbuild ./src/main.js --bundle --minify --outfile=./src/script.js",
+    "build-tailwind": "npx tailwindcss -i ./styles/style.css -o ./styles/main.css",
+    "build-tailwind-watch": "npx tailwindcss -i ./styles/style.css -o ./styles/main.css --watch"
+  },
+  "author": "ItsTheWhale",
+  "license": "",
+  "devDependencies": {
+    "esbuild": "^0.18.11",
+    "http-server": "^14.1.1",
+    "tailwindcss": "^3.3.2"
+  }
+}

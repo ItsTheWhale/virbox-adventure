@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <!--
+        Virbox Adventure
+        A text-based adventure game made for Virbox's Coding Event #1
+        By ItsTheWhale
+    -->
+    <title>Virbox Adventure</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="./styles/main.css" />
+    <!-- For development purposes, use ./src/script.js for bundled file -->
+    <script defer type="module" src="./src/main.js"></script>
+    <!-- <script defer type="text/javascript" src="./src/script.js"></script> -->
+    <script defer type="text/javascript" src="./libs/alpine.3.12.3.js"></script>
+</head>
+
+<body class="font-serif h-screen">
+    <div x-data="Game" id="game" class="flex" x-show="!UI.gameOver" x-transition.duration.1000ms @game-game-over.camel="
+    UI.gameOver = true;
+    " @game-update-resources.camel="
+    window.Game.Resources.ResourceData.forEach((r, i) => {
+        Resources.ResourceData[i].amount = r.amount;
+        Resources.ResourceData[i].unlocked = r.unlocked; 
+    });
+    UI.Resources.maxSpace = window.Game.Resources.computeMaxSpace();
+    UI.Resources.freeSpace = UI.Resources.maxSpace - window.Game.Resources.computeUsedSpace();
+    " @game-update-logs.camel="
+    Display.Logs.logs = [];
+    window.Game.Display.Logs.logs.forEach(log => {
+        Display.Logs.logs.push({
+            text: log.text
+        });
+    })
+    " @game-update-map.camel="
+    World.mapString = window.Game.World.mapString;
+    " @game-update-modal.camel="
+    UI.Modal.showModal = window.Game.Events.eventActive;
+    UI.Modal.title = window.Game.Events.CurrentEvent.title;
+    UI.Modal.currentScene = window.Game.Events.CurrentEvent.currentScene;
+    UI.Modal.scenes = {};
+    const scenes = window.Game.Events.CurrentEvent.scenes;
+    for (let e of Object.keys(scenes)) {
+        let actions = [];
+        for (let b in scenes[e].actions) {
+            actions.push({
+                text: scenes[e].actions[b].text,
+                disabled: scenes[e].actions[b].disabled ?? false
+            });
+        }
+        UI.Modal.scenes[e] = {
+            text: scenes[e].text,
+            actions
+        };
+    }
+    ">
+        <div class="text-left w-1/6 p-2.5">
+            <div>
+                <p>Resources (<span x-text="UI.Resources.freeSpace"></span>/<span x-text="UI.Resources.maxSpace"></span>
+                    space)</p>
+                <table class="[&>tbody>tr>td]:pr-2.5">
+                    <tbody>
+                        <template x-for="resource in Resources.ResourceData">
+                            <tr x-show="resource.unlocked">
+                                <td x-text="resource.name"></td>
+                                <td x-text="resource.amount"></td>
+                                <td x-show="resource.space">(<span x-text="resource.space * resource.amount"></span> s)
+                                </td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="text-center w-1/2 h-screen">
+            <!--50x50 map-->
+            <div x-html="World.mapString" class="border border-black text-neutral-400 font-mono leading-3">
+            </div>
+            <input type="text" id="command" placeholder="> command" class="border border-black w-full" />
+        </div>
+        <div class="text-left w-1/3 p-2.5">
+            <template x-for="log in Display.Logs.logs">
+                <div>
+                    <div x-html="log.text"></div>
+                    <br />
+                </div>
+            </template>
+        </div>
+        <div x-show="UI.Modal.showModal"
+            class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-black bg-white  p-5">
+            <p x-text="UI.Modal.title" class="underline"></p>
+            <br />
+            <!-- <p class="underline absolute right-1 top-1">Close</p> -->
+            <p x-html="UI.Modal.scenes[UI.Modal.currentScene].text"></p>
+            <br />
+            <div>
+                <template x-for="action in UI.Modal.scenes[UI.Modal.currentScene].actions">
+                    <span x-text="action.text" class="border border-black p-1 mr-3"
+                        :class="{ 'text-neutral-400': action.disabled }"></span>
+                </template>
+            </div>
+        </div>
+    </div>
+    <div id="gameOver" class="hidden text-center leading-100vh">
+        <b>Game Over</b>
+    </div>
+    <div id="victory" class="hidden text-center">
+        <p class="flex items-center justify-center h-screen">
+            You feel like you have been conned by an irresponsible developer who ran out of time during a coding
+            event.<br />
+            At this point, memories come flooding back.<br />
+            You take off your VR headsets, and power down your copy of Virbox Adventure.<br />
+            It had all been a dream, but it all seemed too real.
+        </p>
+    </div>
+</body>
+
+</html>
