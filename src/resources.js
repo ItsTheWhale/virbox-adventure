@@ -423,7 +423,7 @@ export class Resources {
                     amount: 1
                 },
             ],
-            unlocked: true
+            unlocked: false
         },
     ]
 
