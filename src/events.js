@@ -2161,7 +2161,7 @@ export class Events {
                                 Game.Resources.Crafting.find(c => c.id === "jsengine").unlocked = true;
 
                                 Game.Display.Logs.add({
-                                    text: "You can now craft a JS engine."
+                                    text: "You have enough JS fragments to craft a JS engine."
                                 });
                             }
                         },
