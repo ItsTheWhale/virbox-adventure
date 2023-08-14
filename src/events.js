@@ -2006,6 +2006,26 @@ export class Events {
                 },
                 talk10: {
                     text: `
+                    "Also, you appear to have a special power. A power beyond everything known in Virboxlandia. Perhaps you are the only one that can do what you want to do...", said the Old Master.
+                    `,
+                    actions: [
+                        {
+                            name: "continue",
+                            text: "[continue]",
+                            commandParser: Game.Command.ParserCombinator.word("continue"),
+                            nextScene: "talk11",
+                            help: {
+                                name: "continue",
+                                description: "Talk with the Old Master.",
+                                usage: "continue",
+                                aliases: []
+                            },
+                            effect: function () { }
+                        },
+                    ]
+                },
+                talk11: {
+                    text: `
                     The Old Master said: "Well that is all that I can help you, and I wish you luck on your journey".<br/>
                     "Take this. This will probably help you in your path", said the master, handing you a JS fragment.<br/>
                     You give him your thanks, and wave goodbye to the silhouette disappearing in the horizon.
@@ -2452,19 +2472,271 @@ export class Events {
                     `,
                     actions: [
                         {
-                            name: "end",
-                            text: "[end]",
-                            commandParser: Game.Command.ParserCombinator.word("end"),
+                            name: "continue",
+                            text: "[continue]",
+                            commandParser: Game.Command.ParserCombinator.word("continue"),
                             nextScene: "end",
                             help: {
-                                name: "end",
-                                description: "End.",
-                                usage: "end",
+                                name: "continue",
+                                description: "Continue.",
+                                usage: "continue",
                                 aliases: []
                             },
+                            chainEvent: true,
                             effect: function () {
-                                Game.Renderer.gameOver();
-                                setTimeout(() => document.getElementById("victory").classList.remove("hidden"), 1000);
+                                Game.Events.createEvent({
+                                    title: "Virbox",
+                                    currentScene: "main",
+                                    scenes: {
+                                        main: {
+                                            text: `
+                                            You look beside, and is shocked to see Virbox standing right beside you.<br/>
+                                            "I teleported out, of course", said Virbox as if reading your thoughts. "I naturally have my own ways, I designed that crystal prison myself after all."<br/>
+                                            You feel like you have been conned by an irresponsible developer who ran out of time during a coding
+                                    event, but who are you to comment?
+                                            `,
+                                            actions: [
+                                                {
+                                                    name: "continue",
+                                                    text: "[continue]",
+                                                    commandParser: Game.Command.ParserCombinator.word("continue"),
+                                                    nextScene: "virbox2",
+                                                    help: {
+                                                        name: "continue",
+                                                        description: "Continue.",
+                                                        usage: "continue",
+                                                        aliases: []
+                                                    },
+                                                    effect: function () {
+
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        virbox2: {
+                                            text: `
+                                            "You wish to know who you are, why you are here and what even is this world", continued Virbox.<br/>
+                                            You are even more shocked by Virbox reading your mind, and temporarily forget he can read the game files of any player's memory.<br/>
+                                            "Yes", you reply.<br/>
+                                            "This will be a long story", cautioned Virbox, but you are ready for any secrets, however long.
+                                            `,
+                                            actions: [
+                                                {
+                                                    name: "continue",
+                                                    text: "[continue]",
+                                                    commandParser: Game.Command.ParserCombinator.word("continue"),
+                                                    nextScene: "virbox3",
+                                                    help: {
+                                                        name: "continue",
+                                                        description: "Continue.",
+                                                        usage: "continue",
+                                                        aliases: []
+                                                    },
+                                                    effect: function () {
+
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        virbox3: {
+                                            text: `
+                                            "You are indeed special. A power beyond what anyone in Virboxlandia has ever seen.", observed Virbox.<br/>
+                                            So the Old Master, <em>*ahem*</em> Macro, was right. You suddenly feel special.<br/>
+                                            "Free will. A rare gift beyond everything. We, everyone, every single individual in Virboxlandia live our lives like clockwork. Scripted. All puppets in a play.", continued Virbox.<br/>
+                                            `,
+                                            actions: [
+                                                {
+                                                    name: "continue",
+                                                    text: "[continue]",
+                                                    commandParser: Game.Command.ParserCombinator.word("continue"),
+                                                    nextScene: "virbox4",
+                                                    help: {
+                                                        name: "continue",
+                                                        description: "Continue.",
+                                                        usage: "continue",
+                                                        aliases: []
+                                                    },
+                                                    effect: function () {
+
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        virbox4: {
+                                            text: `
+                                            "... but you are different. You possess a power, the power to choose your own path. You can choose to do anything you like in this world on your whim, something that we in this world cannot, eternally following a predefined line.", continued Virbox.<br/>
+                                            "Indeed, you are the only one that can do many things that are beyond our comprehension. You, alone, are real and alive."<br/>
+                                            `,
+                                            actions: [
+                                                {
+                                                    name: "continue",
+                                                    text: "[continue]",
+                                                    commandParser: Game.Command.ParserCombinator.word("continue"),
+                                                    nextScene: "virbox5",
+                                                    help: {
+                                                        name: "continue",
+                                                        description: "Continue.",
+                                                        usage: "continue",
+                                                        aliases: []
+                                                    },
+                                                    effect: function () {
+
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        virbox5: {
+                                            text: `
+                                            "But who is Macro and why did he help me?", you demand.<br/>
+                                            "Ah, Macro. I suppose you know many things about the Shade War.", replied Virbox.
+                                            `,
+                                            actions: [
+                                                {
+                                                    name: "continue",
+                                                    text: "[continue]",
+                                                    commandParser: Game.Command.ParserCombinator.word("continue"),
+                                                    nextScene: "virbox6",
+                                                    help: {
+                                                        name: "continue",
+                                                        description: "Continue.",
+                                                        usage: "continue",
+                                                        aliases: []
+                                                    },
+                                                    effect: function () {
+
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        virbox6: {
+                                            text: `
+                                            "Yes, I saw that fragment of Macro escape in the final hardening of the crystal prison", said Virbox, reading your mind once again.<br/>
+                                            "I knew that was enough to reconstruct Macro, but I had no choice but to let it go. What use to chase it except to delay the inevitable? Macro is immortal and will never be defeated, except by someone like you. Your free will is truly the most powerful thing in this world, powerful enough to do what everyone else has failed, defeat Macro once and for all.", he continued.<br/>
+                                            "I anticipated all this. When I saw Macro escape, I knew that one day in the future, Macro would come for me during an excursion outside my protective city walls. That is why you are here. I gave you the quest of finding me, and the rest is history."<br/>
+                                            `,
+                                            actions: [
+                                                {
+                                                    name: "continue",
+                                                    text: "[continue]",
+                                                    commandParser: Game.Command.ParserCombinator.word("continue"),
+                                                    nextScene: "virbox7",
+                                                    help: {
+                                                        name: "continue",
+                                                        description: "Continue.",
+                                                        usage: "continue",
+                                                        aliases: []
+                                                    },
+                                                    effect: function () {
+
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        virbox7: {
+                                            text: `
+                                            "Why, I wiped your memory and implanted a fragment of my own.", said Virbox coolly.<br/>
+                                            "You... what?", you reply.<br/>
+                                            "That is why you could not remember a single thing when you began the journey. Only one, driving desire to "find Virbox". I... well borrowed your power of free will, but it is time to restore your full memory."
+                                            `,
+                                            actions: [
+                                                {
+                                                    name: "continue",
+                                                    text: "[continue]",
+                                                    commandParser: Game.Command.ParserCombinator.word("continue"),
+                                                    nextScene: "virbox8",
+                                                    help: {
+                                                        name: "continue",
+                                                        description: "Continue.",
+                                                        usage: "continue",
+                                                        aliases: []
+                                                    },
+                                                    effect: function () {
+
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        virbox8: {
+                                            text: `
+                                            "Wait. But Macro said he knew you in the past. And why did he help me if he knew I was against him?", you ask.<br/>
+                                            "Perhaps some secrets are better left untold...", replies Virbox cryptically, evading the question.<br/>
+                                            You persist, but are silenced by the king of Virboxlandia.
+                                            `,
+                                            actions: [
+                                                {
+                                                    name: "continue",
+                                                    text: "[continue]",
+                                                    commandParser: Game.Command.ParserCombinator.word("continue"),
+                                                    nextScene: "givegrass",
+                                                    help: {
+                                                        name: "continue",
+                                                        description: "Continue.",
+                                                        usage: "continue",
+                                                        aliases: []
+                                                    },
+                                                    effect: function () {
+
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        givegrass: {
+                                            text: `
+                                            "Time to restore your memory", said Virbox, rummaging through his pockets.<br/>
+                                            He produces a strange, green blade-like plant. It is short and thin, and a vibrant green like an emerald unlike anything you have ever seen before.<br/>
+                                            "Take this. This is a mysterious artefact that was lost from Virboxlandia ever since its founding, and is said to have dangerous but powerful powers. Touching iti might help you restore your memory. Btw I use Arch.", said Virbox, handing the green plant to you.<br/>
+                                            You carefully take the plant from Virbox, and immediately feel a surge of power run from the object, tingling your body.<br/>
+                                            You look back up to thank Virbox, but he vanishes, journeying once more into the icy winter night.
+                                            `,
+                                            actions: [
+                                                {
+                                                    name: "continue",
+                                                    text: "[continue]",
+                                                    commandParser: Game.Command.ParserCombinator.word("continue"),
+                                                    nextScene: "touch",
+                                                    help: {
+                                                        name: "continue",
+                                                        description: "Continue.",
+                                                        usage: "continue",
+                                                        aliases: []
+                                                    },
+                                                    effect: function () {
+                                                        Game.Resources.ResourceData.find(r => r.id === "plant").unlocked = true;
+                                                        Game.Resources.ResourceData.find(r => r.id === "plant").amount++;
+
+                                                        Game.Renderer.updateResources();
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        touch: {
+                                            text: `
+                                            Oh well, time to touch this green plant and see what it does.
+                                            `,
+                                            actions: [
+                                                {
+                                                    name: "touch",
+                                                    text: "[touch] (1 plant)",
+                                                    commandParser: Game.Command.ParserCombinator.word("touch"),
+                                                    nextScene: "end",
+                                                    help: {
+                                                        name: "touch",
+                                                        description: "Touch this strange green plant.",
+                                                        usage: "touch",
+                                                        aliases: []
+                                                    },
+                                                    effect: function () {
+                                                        Game.Resources.ResourceData.find(r => r.id === "plant").amount--;
+                                                        Game.Renderer.updateResources();
+
+                                                        Game.Renderer.gameOver();
+                                                        setTimeout(() => document.getElementById("victory").classList.remove("hidden"), 1000);
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                    }
+                                });
                             }
                         }
                     ]

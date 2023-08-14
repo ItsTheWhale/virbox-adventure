@@ -1,6 +1,14 @@
 export class Resources {
     ResourceData = [
         {
+            name: "plant",
+            id: "plant",
+            amount: 0,
+            space: 0,
+            description: "A mysterious green plant, said to have unimaginable power.",
+            unlocked: false
+        },
+        {
             name: "water",
             id: "water",
             amount: 0,
