@@ -2393,7 +2393,7 @@ export class Events {
                                     enemyAttacks: {
                                         attack: {
                                             name: "attack",
-                                            damage: 2,
+                                            damage: 3,
                                             cooldown: 0,
                                             cooldownRemaining: 0,
                                             logMessage: function (damage, enemyName) {
@@ -2403,7 +2403,7 @@ export class Events {
                                         },
                                         slash: {
                                             name: "slash",
-                                            damage: 4,
+                                            damage: 5,
                                             cooldown: 1,
                                             cooldownRemaining: 0,
                                             logMessage: function (damage, enemyName) {
